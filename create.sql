@@ -8,7 +8,8 @@ NOM char(12) NOT NULL,
 TIPUS char(12) NULL,
 ATACS text[]
 );
-
+CREATE SEQUENCE pokemon_id_seq;
+ALTER TABLE POKEMON ALTER ID SET DEFAULT NEXTVAL('pokemon_id_seq');
 Alter sequence pokemon_id_seq restart with 1;
 
 INSERT INTO POKEMON (NOM, TIPUS, ATACS)  VALUES ('POKEMON1', 'TIPUS1' , '{ATAC1, ATAC2, ATAC3}');

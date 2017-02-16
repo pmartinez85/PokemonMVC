@@ -15,11 +15,6 @@ public class Contenedora {
     
     Array atac = null;
 
-    @Override
-    public String toString() {
-        return "Contenedora{" + "atac=" + atac + '}';
-    }
-
     public Array getAtacs() {
         return atac;
     }
@@ -30,6 +25,11 @@ public class Contenedora {
 
     public void setAtac(Array atac) {
         this.atac = atac;
+    }
+    
+     @Override
+    public String toString() {
+        return "Contenedora{" + "atac=" + atac + '}';
     }
 
 

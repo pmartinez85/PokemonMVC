@@ -19,6 +19,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -27,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import mvcpokemon.model.Model;
+import static mvcpokemon.model.Model.con;
 import mvcpokemon.view.VistaPokemons;
 
 /**
@@ -42,6 +44,7 @@ public class Controlador {
     private String nom = "";
     private String tipus = "";
     private Array atacs = null;
+    public String[] atacsArray= null;
 
     
     public Controlador(Model odb, VistaPokemons jf) {
@@ -185,10 +188,11 @@ public class Controlador {
                         vista.getjTextField2().setText(tipus);
                         
                         atacs = (Array) vista.getjTable2().getValueAt(filasel, 3);
-                        vista.getjTextField3().setText(atacs.toString());
+                        vista.getjTextField3().setText(atacs==null?"":atacs.toString());
                         
                     }else borrarCamps();
                 } catch (NumberFormatException ex) {
+                    System.out.println("Error al generar les dades: " + ex);
                 }
             }
         
@@ -206,7 +210,15 @@ public class Controlador {
                     tipus = vista.getjTextField2().getText().trim();
                 }
                 if(e.getSource().equals(vista.getjTextField3())){
-                    atacs = (Array) vista.getjTextField3();
+                    try {
+                        String separar = vista.getjTextField3().getText().replace("{", "");
+                        separar = separar.replace("}", "");
+                        final String[] arrayAtacs = separar.split(",");
+                        atacs = con.createArrayOf("text", arrayAtacs);
+                    }catch (SQLException e2) {
+                        System.out.println("Error al crear l'array" + e2);
+                    }
+                    //atacs = (Array) vista.getjTextField3();
                 }
             }
         

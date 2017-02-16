@@ -21,8 +21,8 @@ import java.util.Properties;
  * @author pedro
  */
 public class Model {
-    private static Connection con=null;  
-    private static ResultSet rt = null;
+    public static Connection con=null;  
+    public static ResultSet rt = null;
 
     public Model() {
         Properties props = new Properties();
