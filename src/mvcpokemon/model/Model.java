@@ -108,7 +108,6 @@ public class Model {
         } catch (SQLException ex) {
             System.err.println("Error al modificar el pokemon!!" + ex);
         }  
-    
     }
     
     public ArrayList<TaulaPokemon> llistarPokemons(){
