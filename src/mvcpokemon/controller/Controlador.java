@@ -19,7 +19,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Array;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -39,13 +38,12 @@ public class Controlador {
     private Model odb;
     private VistaPokemons vista;
     private int filasel=-1;
+    private int id = -1;
     private String nom = "";
     private String tipus = "";
-    private String[] atacs = {"as","asd","aassdd"};
+    private Array atacs = null;
 
     
-    private int id = -1;
-
     public Controlador(Model odb, VistaPokemons jf) {
         this.odb = odb;
         this.vista = jf;
@@ -60,20 +58,17 @@ public class Controlador {
         vista.getjTextField1().setText("");
         vista.getjTextField2().setText("");
         vista.getjTextField3().setText("");
-        nom=tipus="";
     }
 
     public void carregaTaula(ArrayList resultSet) {
-        // TODO add your handling code here:
         //Quan tornem a carregar la taula perdem la selecció que haviem fet i posem filasel a -1
         filasel = -1;
 
         //Si hi ha algun element a l'arraylist omplim la taula
-        if (resultSet.size() != 0) {
+        if (!resultSet.isEmpty()) {
             Vector columnNames = new Vector();
             Vector data = new Vector();
             DefaultTableModel model;
-
             //Obtenim la classe dels objectes de la llista
             Class<?> classe = resultSet.get(0).getClass();
             //Anotem el nº de camps de la classe
@@ -182,12 +177,16 @@ public class Controlador {
                     filasel = vista.getjTable2().getSelectedRow();
                     if (filasel != -1) {
                         id = Integer.parseInt(vista.getjTable2().getValueAt(filasel, 0).toString());
+                        
                         nom = (String) vista.getjTable2().getValueAt(filasel, 1);
                         vista.getjTextField1().setText(nom);
+                        
                         tipus = (String) vista.getjTable2().getValueAt(filasel, 2);
                         vista.getjTextField2().setText(tipus);
-                        atacs = (String[]) vista.getjTable2().getValueAt(filasel, 3);
-                        //vista.getjTextField3().setText(atacs);
+                        
+                        atacs = (Array) vista.getjTable2().getValueAt(filasel, 3);
+                        vista.getjTextField3().setText(atacs.toString());
+                        
                     }else borrarCamps();
                 } catch (NumberFormatException ex) {
                 }
@@ -207,7 +206,7 @@ public class Controlador {
                     tipus = vista.getjTextField2().getText().trim();
                 }
                 if(e.getSource().equals(vista.getjTextField3())){
-                    //atacs = vista.getjTextField3().getText().trim();
+                    atacs = (Array) vista.getjTextField3();
                 }
             }
         

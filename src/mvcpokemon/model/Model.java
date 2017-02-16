@@ -62,15 +62,15 @@ public class Model {
         }
     }
     
-    public void insertarPokemon(String _2_nom, String _3_tipus, String[] _4_atacs){
+    public void insertarPokemon(String _2_nom, String _3_tipus, Array _4_atacs){
             
         String sql = "INSERT INTO pokemon (nom, tipus, atacs) VALUES (? , ? , ?)";
         
         try(PreparedStatement sentenciaPr=con.prepareStatement(sql)) {
-            Array arrayatacs = con.createArrayOf("text", _4_atacs);
+            //Array arrayatacs = con.createArrayOf("text", _4_atacs);
             sentenciaPr.setString(1, _2_nom);
             sentenciaPr.setString(2, _3_tipus);
-            sentenciaPr.setArray(3, arrayatacs);
+            sentenciaPr.setArray(3, _4_atacs);
             sentenciaPr.executeUpdate();
         } catch (SQLException ex) {
             System.err.println("Error a l'insertar el pokemon!!");
@@ -90,14 +90,14 @@ public class Model {
     
     }
     
-    public void modificarPokemon(int _1_id, String _2_nom, String _3_tipus, String[] _4_atacs){
+    public void modificarPokemon(int _1_id, String _2_nom, String _3_tipus, Array _4_atacs){
             
         String sql = "UPDATE pokemon SET nom=?, tipus=? , atacs=?" + "WHERE id=?";
         try(PreparedStatement sentenciaPr=con.prepareStatement(sql)) {
-            Array arrayatacs = con.createArrayOf("text", _4_atacs);
+            //Array arrayatacs = con.createArrayOf("text", _4_atacs);
             sentenciaPr.setString(2, _2_nom);
             sentenciaPr.setString(3, _3_tipus);
-            sentenciaPr.setString(4, String.valueOf(arrayatacs));
+            sentenciaPr.setArray(4, _4_atacs);
             sentenciaPr.setInt(1, _1_id);
             sentenciaPr.executeUpdate();
         } catch (SQLException ex) {
@@ -119,17 +119,17 @@ public class Model {
                     int id=rt.getInt(1);
                     String nom=rt.getString(2);
                     String tipus=rt.getString(3);
-                    String[] atacs=(String[]) rt.getArray(4).getArray();
-                    llista.add(new TaulaPokemon(id, nom, tipus, atacs));                
+                    Array atacs=rt.getArray(4);
+                    
+                    //llista.add(new TaulaPokemon(id, nom, tipus, new Contenedora(atacs)));
+                    llista.add(new TaulaPokemon(id, nom, tipus, atacs));   
                 }
-            
             }
         } catch (SQLException ex) {
             System.err.println("Error al llistar els pokemons!!");
         }  
         return llista;    
     }
-    
-    
-    
+
+
 }

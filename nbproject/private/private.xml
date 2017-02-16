@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/pedro/NetBeansProjects/MVCMySQL/src/mvcmysql/model/TaulaPokemon.java</file>
-            <file>file:/home/pedro/NetBeansProjects/MVCMySQL/src/mvcmysql/model/Model.java</file>
-            <file>file:/home/pedro/NetBeansProjects/MVCMySQL/src/mvcmysql/view/VistaPokemons.java</file>
-            <file>file:/home/pedro/NetBeansProjects/MVCMySQL/src/mvcmysql/MVCMySQL.java</file>
-            <file>file:/home/pedro/NetBeansProjects/MVCMySQL/src/mvcmysql/controller/Controlador.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
