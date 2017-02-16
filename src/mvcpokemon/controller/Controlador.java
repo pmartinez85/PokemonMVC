@@ -39,7 +39,7 @@ public class Controlador {
 
     private Model odb;
     private VistaPokemons vista;
-    private int filasel=-1;
+    private int filasel= -1;
     private int id = -1;
     private String nom = "";
     private String tipus = "";
@@ -149,7 +149,7 @@ public class Controlador {
                         if (actionEvent.getSource().equals(vista.getjButton7())) {
                             if (filasel!=-1 && (!nom.equals("") || !tipus.equals(""))){
                             
-                                    odb.modificarPokemon(id, nom, tipus, atacs);
+                                    odb.modificarPokemon(nom, tipus, atacs, id);
                                     borrarCamps();
                                     carregaTaula(odb.llistarPokemons());
                                 
@@ -215,11 +215,10 @@ public class Controlador {
                         separar = separar.replace("}", "");
                         final String[] arrayAtacs = separar.split(",");
                         atacs = con.createArrayOf("text", arrayAtacs);
-                        Model.ps.setArray(1, atacs);
+                        //Model.ps.setArray(1, atacs);
                     }catch (SQLException e2) {
                         System.out.println("Error al crear l'array" + e2);
                     }
-                    //atacs = (Array) vista.getjTextField3();
                 }
             }
         

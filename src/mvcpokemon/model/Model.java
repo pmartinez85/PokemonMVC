@@ -21,14 +21,14 @@ import java.util.Properties;
  * @author pedro
  */
 public class Model {
-    public static Connection con=null;  
+    public static Connection con= null;  
     public static ResultSet rt = null;
     public static PreparedStatement ps = null;
 
     public Model() {
         Properties props = new Properties();
         String url, user, password;
-        url=user=password=null;
+        url = user = password = null;
         
         try(FileInputStream in = new FileInputStream("database.properties")) {
             props.load(in);
@@ -91,25 +91,29 @@ public class Model {
     
     }
     
-    public void modificarPokemon(int _1_id, String _2_nom, String _3_tipus, Array _4_atacs){
+    public void modificarPokemon(String _2_nom, String _3_tipus, Array _4_atacs, int _1_id){
             
-        String sql = "UPDATE pokemon SET nom=?, tipus=? , atacs=?" + "WHERE id=?";
+        String sql = "UPDATE pokemon SET nom=?, tipus=?, atacs=? WHERE id=?";
         try(PreparedStatement sentenciaPr=con.prepareStatement(sql)) {
             //Array arrayatacs = con.createArrayOf("text", _4_atacs);
-            sentenciaPr.setString(2, _2_nom);
-            sentenciaPr.setString(3, _3_tipus);
-            sentenciaPr.setArray(4, _4_atacs);
-            sentenciaPr.setInt(1, _1_id);
+            
+            sentenciaPr.setString(1, _2_nom);
+            sentenciaPr.setString(2, _3_tipus);
+            sentenciaPr.setArray(3, _4_atacs);
+            sentenciaPr.setInt(4, _1_id);
+            System.out.println(_1_id);
+            System.out.println(sql);
             sentenciaPr.executeUpdate();
+            
         } catch (SQLException ex) {
-            System.err.println("Error al modificar el pokemon!!");
+            System.err.println("Error al modificar el pokemon!!" + ex);
         }  
     
     }
     
     public ArrayList<TaulaPokemon> llistarPokemons(){
             
-        ArrayList llista=new ArrayList();
+        ArrayList llista = new ArrayList();
         String sql = "SELECT * FROM pokemon ORDER BY 1;";
         try(PreparedStatement sentenciaPr=con.prepareStatement(sql)) {
             this.rt=sentenciaPr.executeQuery();
@@ -121,8 +125,6 @@ public class Model {
                     String nom=rt.getString(2);
                     String tipus=rt.getString(3);
                     Array atacs=rt.getArray(4);
-                    
-                    //llista.add(new TaulaPokemon(id, nom, tipus, new Contenedora(atacs)));
                     llista.add(new TaulaPokemon(id, nom, tipus, atacs));   
                 }
             }
