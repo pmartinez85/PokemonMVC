@@ -215,6 +215,7 @@ public class Controlador {
                         separar = separar.replace("}", "");
                         final String[] arrayAtacs = separar.split(",");
                         atacs = con.createArrayOf("text", arrayAtacs);
+                        Model.ps.setArray(1, atacs);
                     }catch (SQLException e2) {
                         System.out.println("Error al crear l'array" + e2);
                     }

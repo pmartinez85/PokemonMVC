@@ -23,6 +23,7 @@ import java.util.Properties;
 public class Model {
     public static Connection con=null;  
     public static ResultSet rt = null;
+    public static PreparedStatement ps = null;
 
     public Model() {
         Properties props = new Properties();
