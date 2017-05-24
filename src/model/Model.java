@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package mvcpokemon.model;
+package model;
 
+import entitats.Pokemon;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Array;
@@ -101,8 +102,8 @@ public class Model {
             sentenciaPr.setString(2, _3_tipus);
             sentenciaPr.setArray(3, _4_atacs);
             sentenciaPr.setInt(4, _1_id);
-            System.out.println(_1_id);
-            System.out.println(sql);
+//            System.out.println(_1_id);
+//            System.out.println(sql);
             sentenciaPr.executeUpdate();
             
         } catch (SQLException ex) {
@@ -110,7 +111,7 @@ public class Model {
         }  
     }
     
-    public ArrayList<TaulaPokemon> llistarPokemons(){
+    public ArrayList<Pokemon> llistarPokemons(){
             
         ArrayList llista = new ArrayList();
         String sql = "SELECT * FROM pokemon ORDER BY 1;";
@@ -124,7 +125,7 @@ public class Model {
                     String nom=rt.getString(2);
                     String tipus=rt.getString(3);
                     Array atacs=rt.getArray(4);
-                    llista.add(new TaulaPokemon(id, nom, tipus, atacs));   
+                    llista.add(new Pokemon(id, nom, tipus, atacs));   
                 }
             }
         } catch (SQLException ex) {

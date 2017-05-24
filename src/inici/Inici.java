@@ -4,20 +4,20 @@
  * and open the template in the editor.
  */
 
-package mvcpokemon;
+package inici;
 
-import mvcpokemon.view.VistaPokemons;
-import mvcpokemon.model.Model;
-import mvcpokemon.controller.Controlador;
+import vista.Vista;
+import model.Model;
+import controlador.Controlador;
 
 /**
  *
  * @author pedro
  */
-public class pokemonMVC {
+public class Inici {
     
     static Model model=new Model();
-    static VistaPokemons vista=new VistaPokemons();
+    static Vista vista=new Vista();
 
     /**
      * @param args the command line arguments

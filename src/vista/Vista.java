@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvcpokemon.view;
+package vista;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,12 +16,12 @@ import javax.swing.JTextField;
  *
  * @author pedro
  */
-public class VistaPokemons extends javax.swing.JFrame {
+public class Vista extends javax.swing.JFrame {
 
     /**
      * Creates new form JFramePrincipal
      */
-    public VistaPokemons() {
+    public Vista() {
         initComponents();
     }
 

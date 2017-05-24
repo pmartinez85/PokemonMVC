@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvcpokemon.controller;
+package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,9 +27,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import mvcpokemon.model.Model;
-import static mvcpokemon.model.Model.con;
-import mvcpokemon.view.VistaPokemons;
+import model.Model;
+import static model.Model.con;
+import vista.Vista;
 
 /**
  *
@@ -38,7 +38,7 @@ import mvcpokemon.view.VistaPokemons;
 public class Controlador {
 
     private Model odb;
-    private VistaPokemons vista;
+    private Vista vista;
     private int filasel= -1;
     private int id = -1;
     private String nom = "";
@@ -47,7 +47,7 @@ public class Controlador {
     public String[] atacsArray= null;
 
     
-    public Controlador(Model odb, VistaPokemons jf) {
+    public Controlador(Model odb, Vista jf) {
         this.odb = odb;
         this.vista = jf;
         carregaTaula(odb.llistarPokemons());
@@ -91,7 +91,7 @@ public class Controlador {
                     }
                 }
             } catch (IntrospectionException ex) {
-                Logger.getLogger(VistaPokemons.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Vista.class.getName()).log(Level.SEVERE, null, ex);
             }
             for (Object m : resultSet) {
                 Vector row = new Vector(ncamps);
@@ -100,11 +100,11 @@ public class Controlador {
                     try {
                         row.addElement(mD.invoke(m));
                     } catch (IllegalAccessException ex) {
-                        Logger.getLogger(VistaPokemons.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Vista.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(VistaPokemons.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Vista.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (InvocationTargetException ex) {
-                        Logger.getLogger(VistaPokemons.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Vista.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 data.addElement(row);

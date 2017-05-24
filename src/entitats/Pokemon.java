@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mvcpokemon.model;
+package entitats;
 
 import java.sql.Array;
 
@@ -14,14 +14,14 @@ import java.sql.Array;
  * @author pedro
  */
 
-public class TaulaPokemon {
+public class Pokemon {
 
     private int _1_id;
     private String _2_nom;
     private String _3_tipus;
     private Array _4_atac;
 
-    public TaulaPokemon(int _1_id, String _2_nom, String _3_tipus, Array _4_atac) {
+    public Pokemon(int _1_id, String _2_nom, String _3_tipus, Array _4_atac) {
         this._1_id = _1_id;
         this._2_nom = _2_nom;
         this._3_tipus = _3_tipus;
@@ -38,7 +38,7 @@ public class TaulaPokemon {
         this._1_id = _1_id;
     }
 
-    public TaulaPokemon(String _2_nom, String _3_tipus, Array _4_atac) {
+    public Pokemon(String _2_nom, String _3_tipus, Array _4_atac) {
         this._2_nom = _2_nom;
         this._3_tipus = _3_tipus;
         this._4_atac = _4_atac;
