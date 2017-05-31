@@ -41,16 +41,18 @@ public class Controlador {
     private Vista vista;
     private int filasel= -1;
     private int id = -1;
+    private String sql = "";
     private String nom = "";
     private String tipus = "";
     private Array atacs = null;
     public String[] atacsArray= null;
 
+
     
     public Controlador(Model odb, Vista jf) {
         this.odb = odb;
         this.vista = jf;
-        carregaTaula(odb.llistarPokemons());
+        carregaTaula(odb.llistar());
         borrarCamps();
         vista.setVisible(true);
         control();
@@ -128,19 +130,19 @@ public class Controlador {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (actionEvent.getSource().equals(vista.getjButton6())) {
                     if (filasel!=-1){
-                            odb.borrarPokemon(id);
+                            odb.borrar(sql);
                             borrarCamps();
-                            carregaTaula(odb.llistarPokemons());
+                            carregaTaula(odb.llistar());
                     }
-                    else JOptionPane.showMessageDialog(null, "Per borrar un pokemon primer l'has de seleccionar!!", "Error", JOptionPane.ERROR_MESSAGE);                
+                    else JOptionPane.showMessageDialog(null, "Per borrar un objecte primer l'has de seleccionar!!", "Error", JOptionPane.ERROR_MESSAGE);                
                 } 
                 else 
                     if (actionEvent.getSource().equals(vista.getjButton5())) {
                         if (!nom.equals("") || !tipus.equals("") ) {
                          
-                                odb.insertarPokemon(nom, tipus, atacs);
+                                odb.insertar(sql);
                                 borrarCamps();
-                                carregaTaula(odb.llistarPokemons());
+                                carregaTaula(odb.llistar());
                             
                         }
                         else JOptionPane.showMessageDialog(null, "No pots introduir un pokemon sense nom ni tipus!!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -149,9 +151,9 @@ public class Controlador {
                         if (actionEvent.getSource().equals(vista.getjButton7())) {
                             if (filasel!=-1 && (!nom.equals("") || !tipus.equals(""))){
                             
-                                    odb.modificarPokemon(nom, tipus, atacs, id);
+                                    odb.modificar(sql);
                                     borrarCamps();
-                                    carregaTaula(odb.llistarPokemons());
+                                    carregaTaula(odb.llistar());
                                 
                             }
                             else JOptionPane.showMessageDialog(null, "Per modificar un pokemon primer l'has de seleccionar i posar algun valor!!", "Error", JOptionPane.ERROR_MESSAGE);                
